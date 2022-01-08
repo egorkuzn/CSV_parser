@@ -1,13 +1,18 @@
+#include <tuple>
 #include "csv_parser.hpp"
-#include <fstream>
-#include <iostream>
-#include <string>
+#include "my_tuple.hpp"
 
-int main()
-{
-    std::ifstream file("test.csv");
-    csv_parser::CSVParser<int, std::string> parser(file, 0 /*skip first lines count*/);
-    for (std::tuple<int, std::string> rs : parser) {
-        std::cout << rs << std::endl;
+using namespace csv_parser;
+
+int main() {
+    int skip = 0;
+
+    std::ifstream in("test.csv");
+    std::ofstream out("output.txt");
+    CSVParser<int, int, std::string> parser{ in, skip };
+
+    for (auto& iter : parser) {
+        out << iter << '\n';
     }
+    return 0;
 }

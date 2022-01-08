@@ -20,6 +20,13 @@ namespace csv_parser {
 		return os;
 	}
 
+	//template<class A, class B, class... Args>
+	//std::basic_ostream<A, B>& operator<<(std::basic_ostream<A, B>& os, const std::tuple<Args...>& t) {
+	//	print_tuple(os, t, _int<sizeof ...(Args)>());
+	//	return os;
+	//}
+
+
 	template<class A, class B, class... Args>
 	std::basic_ofstream<A, B>& operator<<(std::basic_ofstream<A, B>& os, const std::tuple<Args...>& t) {
 		print_tuple(os, t, _int<sizeof ...(Args)>());

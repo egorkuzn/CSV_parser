@@ -10,13 +10,12 @@ namespace csv_parser {
 	public:
 		class Iterator {
 		public:
-			explicit CSVParser::Iterator::Iterator(std::ifstream* in) : input(in) {
+			explicit CSVParser::Iterator(std::ifstream* in) : input(in) {
 				if (in != nullptr)
-					(*in) >> csv_parser::Iterator::currentRow;
+					(*in) >> currentRow;
 				else
 					position = -1;
 			}
-			~Iterator = default;
 			bool operator==(const Iterator& other) const;
 			bool operator!=(const Iterator& other) const;
 			Iterator& operator++();
