@@ -44,4 +44,19 @@ namespace csv_parser {
 	std::tuple<Args...>& CSVParser<Args...>::Iterator::operator*() {
 		return currentRow;
 	}
+
+	template<class... Args>
+	std::tuple<Args...>* CSVParser<Args...>::Iterator::operator->() {
+		return &currentRow;
+	}
+
+	template<class... Args>
+	typename CSVParser<Args...>::Iterator CSVParser<Args...>::begin() {
+		return Iterator(input);
+	}
+
+	template<class... Args>
+	typename CSVParser<Args...>::Iterator CSVParser<Args...>::end() {
+		return Iterator(nullptr);
+	}
 }
