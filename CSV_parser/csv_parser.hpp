@@ -1,17 +1,26 @@
 #pragma once
 
 //#include <tuple>
-//#include <fstream>
+#include <fstream>
 //#include <sstream>
 
 namespace csv_parser {
-	class CSVParser {
+	class Iterator {
 	public:
-		class Iterator {
-		public:
+		Iterator(std::ifstream* in);
+		~Iterator = default;
+		bool operator==(const Iterator& other) const;
+		bool operator!=(const Iterator& other) const;
+		Iterator& operator++();
+		std::tuple<Args...>& operator*();
+		std::tuple<Args...>* operator->();
+	private:
+		std::ifstream* input;
+		size_t position = 0;
+		std::tuple<Args...> currentRow;
+	};
 
-		private:
-		};
+	class CSVParser {
 	private:
 		std::ifstream* input;
 	public:
@@ -21,4 +30,6 @@ namespace csv_parser {
 
 		Iterator end();
 	};
+
+
 }
