@@ -4,29 +4,37 @@
 #include "my_tuple.hpp"
 
 namespace csv_parser {
-	class Iterator {
-	public:
-		Iterator(std::ifstream* in);
-		~Iterator = default;
-		bool operator==(const Iterator& other) const;
-		bool operator!=(const Iterator& other) const;
-		Iterator& operator++();
-		std::tuple<Args...>& operator*();
-		std::tuple<Args...>* operator->();
-	private:
-		std::ifstream* input;
-		size_t position = 0;
-		std::tuple<Args...> currentRow;
-	};
+	template<class... Args>
 
 	class CSVParser {
+	public:
+		class Iterator {
+		public:
+			explicit CSVParser::Iterator::Iterator(std::ifstream* in) : input(in) {
+				if (in != nullptr)
+					(*in) >> csv_parser::Iterator::currentRow;
+				else
+					position = -1;
+			}
+			~Iterator = default;
+			bool operator==(const Iterator& other) const;
+			bool operator!=(const Iterator& other) const;
+			Iterator& operator++();
+			std::tuple<Args...>& operator*();
+			std::tuple<Args...>* operator->();
+
+		private:
+			std::ifstream* input;
+			size_t position = 0;
+			std::tuple<Args...> currentRow;
+		};
+
 	private:
 		std::ifstream* input;
+
 	public:
 		CSVParser(std::ifstream& in, int skipCount);
-
 		Iterator begin();
-
 		Iterator end();
 	};
 }
