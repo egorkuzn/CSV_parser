@@ -27,8 +27,36 @@ namespace csv_parser {
 	}
 
 	template<class T>
-	std::istringstream& read_elem(std::istringstream& is, T& a);
+	std::istringstream& read_elem(std::istringstream& is, T& a) {
+		std::string data;
+		getline(is, data, ',');
+		std::istringstream(data) >> a;
+		if (!is)
+			throw std::exception();
+		return is;
+	}
 
-	
+	template<>
+	std::istringstream& read_elem(std::istringstream& is, std::string& a) {
+		getline(is, a, ',');
+		return is;
+	}
 
+	template<class Tuple, size_t Pos>
+	std::istringstream& read_tuple(std::istringstream& is, Tuple& t, _int<Pos>) {
+		read_elem(is, std::get<std::tuple_size<Tuple>::value - 1>(t));
+		return is;
+	}
+
+	template<class A, class B, class... Args>
+	std::basic_ifstream<A, B>& operator>>(std::basic_ifstream<A, B>& is, std::tuple<Args...>& t) {
+		std::string line;
+		getline(is, line);
+		if (line.empty())
+			return is;
+		std::istringstream str(line);
+		read_tuple(str, t, _int<sizeof ...(Args)>());
+
+		return is;
+	}
 }
