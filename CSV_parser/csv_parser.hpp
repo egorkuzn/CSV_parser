@@ -1,8 +1,7 @@
 #pragma once
 
-//#include <tuple>
 #include <fstream>
-//#include <sstream>
+#include "my_tuple.hpp"
 
 namespace csv_parser {
 	class Iterator {
@@ -30,6 +29,4 @@ namespace csv_parser {
 
 		Iterator end();
 	};
-
-
 }
