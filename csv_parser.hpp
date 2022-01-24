@@ -37,7 +37,7 @@ namespace csv_parser {
 		Iterator end();
 	};
 
-		template<class... Args>
+	template<class... Args>
 	CSVParser<Args...>::CSVParser(std::ifstream& in, int skipCount) {
 		std::tuple<Args...> row;
 		std::string str;
