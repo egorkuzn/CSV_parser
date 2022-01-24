@@ -3,6 +3,7 @@
 #include <tuple>
 #include <fstream>
 #include <sstream>
+#include <regex>
 
 template<std::size_t>
 struct int_ {};
@@ -38,6 +39,8 @@ std::istringstream& read_element(std::istringstream& is, T& a) {
 template<>
 std::istringstream& read_element(std::istringstream& is, std::string& a) {
     getline(is, a, ',');
+    if(a.find("_comma_") != std::string::npos)
+        a = std::regex_replace(a, std::regex("__comma__"), ",");
     return is;
 }
 
