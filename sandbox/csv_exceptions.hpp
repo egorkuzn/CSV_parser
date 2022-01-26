@@ -47,7 +47,7 @@ namespace csv_error{
     }
 
     void typeDismatching(){
-        stringExeptionsBuffer[inPointer] += "| " + std::to_string(numbInStr) + " element no matches with given type |"; 
+        stringExeptionsBuffer[inPointer] += "| " + std::to_string(numbInStr) + " element no matches with given type"; 
         numbInStr++;
     }
 

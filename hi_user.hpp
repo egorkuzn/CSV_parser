@@ -2,6 +2,8 @@
 #include <iostream>
 #include <map>
 #include "stdlib.h"
+#include <fstream>
+#include <regex>
 
 namespace csv_parser{
     class HiUser{
@@ -10,8 +12,10 @@ namespace csv_parser{
         private:
         void sleepcp(size_t seconds);
         void inputFunction();
+        //void consoleOutput();
         void processFunction();
         std::string TStr;
+        size_t size = 0;
         std::string in;
         std::string out;
         bool errorDetected = false;

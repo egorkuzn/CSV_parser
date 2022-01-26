@@ -25,8 +25,42 @@ namespace csv_parser{
         while (clock() < time_end){}
     }
 
-    void HiUser::processFunction(){
-        std::string command = "sed '10a\\CSVParser<" + TStr + "> parser{ in, skip };' ../sandbox/main_pattern.txt > ../sandbox/main1.cpp";
+/*      void getInputFile(){
+        if(in != "<>"){
+            std::string command = "cd ..\n cd sandbox \n cat  " + in + " > test.csv";
+            system(command); 
+        }
+    }
+ */ 
+/*      void HiUser::consoleOutput(){
+        std::string getcontent;
+        std::ifstream openfile ("../sandbox/output.txt");
+        if(openfile.is_open()){
+            while(! openfile.eof())
+            {                
+                std::string str;
+                for(size_t i = 0; i < size + 1; ++i){
+                openfile >> getcontent;
+                str += getcontent;
+                if(getcontent.back() != '|'){
+                    while(getcontent.back() != '|')
+                        str += getcontent;
+                    break;
+                    }
+
+                }
+
+                if(str.back() != '|')
+                    std::cout << RED << str << NC <<std::endl;
+                else
+                    std::cout << CYN << str << NC << std::endl;
+            }
+        }
+    }
+ 
+ */    void HiUser::processFunction(){
+        //getInputFile();
+        std::string command = "sed '12a\\CSVParser<" + TStr + "> parser{ in, skip };' ../sandbox/main_pattern.txt > ../sandbox/main1.cpp";
         std::cout << "==";
         system(command.c_str());
         std::cout << "===" ;
@@ -34,7 +68,8 @@ namespace csv_parser{
         std::cout << "=====" ;
         sleepcp(0);
         system("cd .. \n cd sandbox \n ./a.out");
-        std::cout << "========>100%" NC <<std::endl;
+        std::cout << "========>100%" NC <<std::endl; 
+        //consoleOutput();       
     }
 
     void HiUser::inputFunction(){
@@ -48,7 +83,6 @@ namespace csv_parser{
             return;
         }
 
-        size_t size;
         std::cin >> size;
         std::string str;
 
