@@ -8,7 +8,7 @@ int main() {
     std::ifstream in("test.csv");
     std::ofstream out("output.txt");
     //CSVParser<int, float, std::string > parser{ in, skip };
- CSVParser<int, float, std::string> parser{ in, skip };
+    CSVParser<int, int, std::string, std::string> parser{ in, skip };
 
     for (auto& iter : parser) {
         out << iter << '\n';

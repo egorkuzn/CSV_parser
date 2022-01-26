@@ -37,7 +37,7 @@ std::basic_ofstream<CharT, Traits>& print_tuple(std::basic_ofstream<CharT, Trait
         return os;
     }
     uint8_t size = getSize(typeid(std::get<std::tuple_size<Tuple>::value - 1>(t)).name());
-    os << std::get<std::tuple_size<Tuple>::value - 1>(t) << '|';// taking from the exception stack buffer
+    os << std::setw(size) << std::get<std::tuple_size<Tuple>::value - 1>(t) << '|';// taking from the exception stack buffer
     csv_error::outPointer++;     
     return os;
 }

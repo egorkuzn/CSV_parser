@@ -14,6 +14,7 @@ namespace csv_parser{
         std::string TStr;
         std::string in;
         std::string out;
+        bool errorDetected = false;
         bool console = false;
     };
 }

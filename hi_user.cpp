@@ -13,22 +13,28 @@ namespace csv_parser{
         std::cout << CYN "<in.csv>\n3\nint\nfloat\nstd::string" << std::endl;
         std::cout << "<out.txt>" << NC "OR YOU CAN ALSO USE" CYN << "console" NC<< std::endl;
         inputFunction();
-        processFunction();  
+        if(!errorDetected){
+            std::cout << GRN "0%==";
+            processFunction();  
+        }
     }
 
     void HiUser::sleepcp(size_t seconds){
         clock_t time_end;
-        time_end = clock() + seconds * CLOCKS_PER_SEC/1000;
+        time_end = clock() + seconds * CLOCKS_PER_SEC;
         while (clock() < time_end){}
     }
 
     void HiUser::processFunction(){
-        //sed '10a\\tCSVParser<int, float, std::string > parser{ in, skip };' main_pattern.cpp > main1.cpp
-        std::string command = "sed '10a\\CSVParser<" + TStr + "> parser{ in, skip };' ../sandbox/main_pattern.cpp > ../sandbox/main1.cpp";
+        std::string command = "sed '10a\\CSVParser<" + TStr + "> parser{ in, skip };' ../sandbox/main_pattern.txt > ../sandbox/main1.cpp";
+        std::cout << "==";
         system(command.c_str());
+        std::cout << "===" ;
         system("g++ ../sandbox/main1.cpp -o ../sandbox/a.out -std=c++2a");
-        sleepcp(10);
-        system("./../sandbox/a.out");
+        std::cout << "=====" ;
+        sleepcp(0);
+        system("cd .. \n cd sandbox \n ./a.out");
+        std::cout << "========>100%" NC <<std::endl;
     }
 
     void HiUser::inputFunction(){
@@ -38,6 +44,7 @@ namespace csv_parser{
             in = input.substr(1, input.find('>') - 2);
         else{
             std::cout << RED "BAD FNAME INPUT" NC << std::endl;
+            errorDetected = true;
             return;
         }
 
@@ -45,10 +52,11 @@ namespace csv_parser{
         std::cin >> size;
         std::string str;
 
-        for(size_t i; i < size; ++i){
+        for(size_t i = 0; i < size; ++i){
             std::cin >> str;            
             if(str[0] == '<'){
                 std::cout << RED "COUNT OF TYPES FEWER THAN EXPECTED" NC << std::endl;
+                errorDetected = true;
                 return;
             }
             TStr += str + ", ";
@@ -56,7 +64,6 @@ namespace csv_parser{
 
         TStr.pop_back(); TStr.pop_back();
 
-        std::string input;
         std::cin >> input;
         if(input == "console")
             console = true;
@@ -64,6 +71,7 @@ namespace csv_parser{
             out = input.substr(1, input.find('>') - 2);
         else {
             std::cout << RED "BAD FNAME INPUT OR COUNT OF TYPES MORE THAN ASKED" NC << std::endl;
+            errorDetected = true;
             return;
         }
     }
