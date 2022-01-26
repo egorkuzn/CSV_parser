@@ -1,19 +1,12 @@
-#include <tuple>
-#include "csv_parser.hpp"
-#include "my_tuple.hpp"
 #include "hi_user.hpp"
 
 using namespace csv_parser;
 
-int main() {
-    int skip = 0;
-
-    std::ifstream in("test.csv");
-    std::ofstream out("output.txt");
-    CSVParser<int, double, std::string> parser{ in, skip };
-
-    for (auto& iter : parser) {
-        out << iter << '\n';
-    }
+int main(){
+    /* system("sed '10a\\\tCSVParser<int, float, std::string > parser{ in, skip };' sandbox/main_pattern.txt > sandbox/main1.cpp");
+    system("g++ sandbox/main1.cpp -o sandbox/a.out -std=c++2a");
+    system("./sandbox/a.out"); */
+    HiUser obj(std::string("linux"));
+    
     return 0;
 }
